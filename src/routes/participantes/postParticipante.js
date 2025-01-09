@@ -1,6 +1,7 @@
 import Participante from "../../models/participante.js";
 
 // Ruta para crear un nuevo participante
+// (POST) /api/roulette
 const postParticipante = async (req, res) => {
   try {
     const { nombre } = req.body;

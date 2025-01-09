@@ -1,6 +1,7 @@
 import Participante from "../../models/participante.js";
 
 // Ruta para cambiar el estado de un participante a "seleccionado"
+// (PATCH) /api/roulette
 const selectParticipante = async (req, res) => {
   try {
     const { id } = req.body;

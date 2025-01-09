@@ -1,6 +1,7 @@
 import Participante from "../../models/participante.js";
 
 // Ruta para obtener todos los participantes
+// (GET) /api/roulette
 const getParticipantes = async (req, res) => {
   try {
     const participantes = await Participante.find({});

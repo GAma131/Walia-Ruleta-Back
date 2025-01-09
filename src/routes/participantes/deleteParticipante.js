@@ -1,6 +1,7 @@
 import Participante from "../../models/participante.js";
 
 // Ruta para eliminar a un participante
+// (DELETE) /api/roulette
 const deleteParticipante = async (req, res) => {
     try {
         const {id} = req.body;

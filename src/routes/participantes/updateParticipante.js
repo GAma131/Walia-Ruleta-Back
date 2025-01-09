@@ -1,5 +1,7 @@
 import Participante from "../../models/participante.js";
 
+// Ruta para actualizar cualquier dato del participante
+// (PATCH) /api/roulette/update
 const updateParticipante = async (req, res) => {
     try{
         const { id, nombre, fecha, seleccionado } = req.body;

@@ -1,5 +1,7 @@
 import Participante from "../../models/participante.js";
 
+// Ruta para reiniciar la ruleta (verificar si todos los participantes han sido seleccionados)
+// (GET) /api/roulette/restart
 const restartRoulette = async (req, res) => {
     try{
         const participantes = await Participante.find();
@@ -9,10 +11,10 @@ const restartRoulette = async (req, res) => {
             await Participante.updateMany({}, {seleccionado: false, fecha: null});
 
             console.log("Todos los participantes han sido seleccionados");
-            res.json({message: "Todos los participantes seleccionados ahora están disponibles"});
+            res.status(200).json({message: "Todos los participantes han sido seleccionados"});
         }else{
             console.log("NO todos los participantes han sido seleccionados");
-            res.json({message: "NO todos los participantes han sido seleccionados"});
+            res.status(400).json({message: "NO todos los participantes han sido seleccionados"});
         }
     }catch(error){
         console.error("Error al verificar participantes seleccionados: ", error);
