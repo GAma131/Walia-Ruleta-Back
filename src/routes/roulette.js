@@ -1,14 +1,19 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+import getParticipantes from './participantes/getParticipantes.js';
+import postParticipante from './participantes/postParticipante.js';
+import selectParticipante from './participantes/selectParticipante.js';
+import deleteParticipante from './participantes/deleteParticipante.js';
+import restartParticipantes from './participantes/restartRoulette.js';
+import updateParticipante from './participantes/updateParticipante.js';
 
-// Ruta para obtener los nombres
-router.get('/', async (req, res) => {
-  try {
-    const participants = ["Nombre1", "Nombre2", "Nombre3"]; // Esto luego será dinámico
-    res.json(participants);
-  } catch (error) {
-    res.status(500).json({ message: 'Error al obtener los nombres.' });
-  }
-});
+const router = Router();
 
-module.exports = router;
+// Rutas
+router.get("/", getParticipantes);
+router.post("/", postParticipante);
+router.delete("/", deleteParticipante);
+router.patch("/", selectParticipante);
+router.get("/restart", restartParticipantes);
+router.patch("/update", updateParticipante);
+
+export default router;
