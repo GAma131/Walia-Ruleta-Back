@@ -12,7 +12,7 @@ const postParticipante = async (req, res) => {
     const nuevoParticipante = new Participante({
       nombre: nombre,
       fecha: "",
-      estado: "disponible",
+      seleccionado: false,
     });
 
     const participanteGuardado = await nuevoParticipante.save();
