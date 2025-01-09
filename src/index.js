@@ -13,10 +13,6 @@ mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("Conectado a mongo"))
 .catch((error) => console.error("Error al conectar a mongo", error));
 
-mongoose.connection.on('error', (err) => {
-  console.log('err', err);
-})
-
 // Iniciar express
 const app = express();
 app.use(express.json());
