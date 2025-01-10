@@ -11,10 +11,10 @@ const restartRoulette = async (req, res) => {
             await Participante.updateMany({}, {seleccionado: false, fecha: null});
 
             console.log("Todos los participantes han sido seleccionados");
-            res.status(200).json({message: "Todos los participantes han sido seleccionados"});
+            res.status(200).json(true);
         }else{
             console.log("NO todos los participantes han sido seleccionados");
-            res.status(400).json({message: "NO todos los participantes han sido seleccionados"});
+            res.status(200).json(false);
         }
     }catch(error){
         console.error("Error al verificar participantes seleccionados: ", error);
