@@ -1,10 +1,11 @@
-import { Router } from 'express';
-import getParticipantes from './participantes/getParticipantes.js';
-import postParticipante from './participantes/postParticipante.js';
-import selectParticipante from './participantes/selectParticipante.js';
-import deleteParticipante from './participantes/deleteParticipante.js';
-import restartParticipantes from './participantes/restartRoulette.js';
-import updateParticipante from './participantes/updateParticipante.js';
+import { Router } from "express";
+import getParticipantes from "./participantes/getParticipantes.js";
+import postParticipante from "./participantes/postParticipante.js";
+import selectParticipante from "./participantes/selectParticipante.js";
+import deleteParticipante from "./participantes/deleteParticipante.js";
+import restartParticipantes from "./participantes/restartRoulette.js";
+import updateParticipante from "./participantes/updateParticipante.js";
+import getHistorico from "./participantes/getHistorico.js";
 
 const router = Router();
 
@@ -25,5 +26,8 @@ router.post("/restart", restartParticipantes);
 
 // (PATCH) /api/roulette/update
 router.patch("/update", updateParticipante);
+
+// (GET) /api/roulette/historico
+router.get("/historico", getHistorico);
 
 export default router;
