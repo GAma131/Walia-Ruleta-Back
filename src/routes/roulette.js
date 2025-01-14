@@ -21,7 +21,7 @@ router.delete("/", deleteParticipante);
 router.patch("/", selectParticipante);
 
 // (GET) /api/roulette/restart
-router.get("/restart", restartParticipantes);
+router.post("/restart", restartParticipantes);
 
 // (PATCH) /api/roulette/update
 router.patch("/update", updateParticipante);
