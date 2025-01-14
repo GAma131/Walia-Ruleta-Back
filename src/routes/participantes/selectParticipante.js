@@ -15,11 +15,16 @@ const selectParticipante = async (req, res) => {
       id,
       { seleccionado: true, fecha: new Date() },
       { new: true }
-    );
+    ).select("nombre departamento");
 
     if (!participanteSeleccionado) {
       return res.status(404).json({ error: "Participante no encontrado" });
     }
+
+    console.log(
+      "Participante seleccionado",
+      participanteSeleccionado.departamento
+    );
 
     const nuevoRegistro = new Historico({
       nombre: participanteSeleccionado.nombre,
