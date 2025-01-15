@@ -13,7 +13,7 @@ const selectParticipante = async (req, res) => {
 
     const participanteSeleccionado = await Participante.findByIdAndUpdate(
       id,
-      { seleccionado: true, fecha: new Date() },
+      { seleccionado: true, fecha: new Date().toLocaleTimeString() },
       { new: true }
     ).select("nombre departamento");
 
@@ -28,7 +28,9 @@ const selectParticipante = async (req, res) => {
 
     const nuevoRegistro = new Historico({
       nombre: participanteSeleccionado.nombre,
-      fecha: participanteSeleccionado.fecha,
+      fecha: new Date().toLocaleString("es-MX", {
+        timeZone: "America/Mexico_City",
+      }),
       departamento: participanteSeleccionado.departamento,
     });
 
