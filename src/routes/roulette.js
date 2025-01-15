@@ -6,6 +6,7 @@ import deleteParticipante from "./participantes/deleteParticipante.js";
 import restartParticipantes from "./participantes/restartRoulette.js";
 import updateParticipante from "./participantes/updateParticipante.js";
 import getHistorico from "./participantes/getHistorico.js";
+import unselectAll from "./participantes/unselectAll.js"
 
 const router = Router();
 
@@ -29,5 +30,8 @@ router.patch("/update", updateParticipante);
 
 // (GET) /api/roulette/historico
 router.get("/historico", getHistorico);
+
+// (PATCH) /api/roulette/all
+router.patch("/all", unselectAll)
 
 export default router;
