@@ -1,33 +1,36 @@
 import Participante from "../../models/participante.js";
 
-// Ruta para actualizar cualquier dato del participante
-// (PATCH) /api/roulette/update
+// Ruta para actualizar los campos de un participante
+// (PUT) /api/roulette
 const updateParticipante = async (req, res) => {
-    try{
-        const { id, nombre, fecha, seleccionado } = req.body;
+    try {
+        const { id, nombre, departamentos, seleccionado } = req.body;
 
-        if(!id){
-            return res.status(400).json({error: "ID es requerido"});
+        if (!id) {
+            return res.status(400).json({ error: "ID es requerido" });
         }
 
-        const actualizar = await Participante.findByIdAndUpdate(
+        // Construir el objeto de actualización basado en los campos recibidos
+        const actualizaciones = {};
+        if (nombre !== undefined) actualizaciones.nombre = nombre;
+        if (departamentos !== undefined) actualizaciones.departamentos = departamentos;
+        if (seleccionado !== undefined) actualizaciones.seleccionado = seleccionado;
+
+        // Actualizar el documento en la base de datos
+        const participanteActualizado = await Participante.findByIdAndUpdate(
             id,
-            {
-                nombre: nombre,
-                fecha: fecha,
-                seleccionado: seleccionado,
-            },
-            {new: true, runValidators: true}
-        )
+            { $set: actualizaciones },
+            { new: true, runValidators: true } // Retorna el documento actualizado y valida los datos
+        );
 
-        if(!actualizar){
-            return res.status(404).json({error: "Participante no encontrado"});
+        if (!participanteActualizado) {
+            return res.status(404).json({ error: "Participante no encontrado" });
         }
 
-        res.json({message: "Participante actualizado", participante: actualizar});
-    }catch(error){
-        console.error("Error al actualizar participante", error);
-        res.status(500).json({error: "Error al actualizar participante"});
+        res.json(participanteActualizado);
+    } catch (error) {
+        console.error("Error al actualizar el participante", error);
+        res.status(500).json({ error: "Error al actualizar el participante" });
     }
 };
 

@@ -1,12 +1,7 @@
 import mongoose from "mongoose";
 
-// Modelo para participantes
-const participanteSchema = new mongoose.Schema({
-  nombre: { type: String },
-  fecha: { type: String },
-  seleccionado: { type: Boolean },
-  departamento: { type: String },
-});
+// Modelo que permite cualquier estructura de datos
+const participanteSchema = new mongoose.Schema({}, { strict: false });
 
 const Participante = mongoose.model(
   "Participante",
