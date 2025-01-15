@@ -28,7 +28,7 @@ const selectParticipante = async (req, res) => {
 
     const nuevoRegistro = new Historico({
       nombre: participanteSeleccionado.nombre,
-      fecha: new Date(),
+      fecha: participanteSeleccionado.fecha,
       departamento: participanteSeleccionado.departamento,
     });
 
