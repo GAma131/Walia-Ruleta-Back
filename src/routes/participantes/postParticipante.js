@@ -1,5 +1,6 @@
 import Participante from "../../models/participante.js";
 
+//! deprecated
 // Ruta para crear un nuevo participante
 // (POST) /api/roulette
 const postParticipante = async (req, res) => {

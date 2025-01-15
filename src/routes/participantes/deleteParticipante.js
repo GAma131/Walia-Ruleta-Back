@@ -1,5 +1,6 @@
 import Participante from "../../models/participante.js";
 
+//! deprecated
 // Ruta para eliminar a un participante
 // (DELETE) /api/roulette
 const deleteParticipante = async (req, res) => {

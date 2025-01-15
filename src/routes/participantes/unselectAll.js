@@ -1,5 +1,6 @@
 import Participante from "../../models/participante.js";
 
+//! deprecated
 // Ruta para actualizar los valores "true" a "false" en el campo "seleccionado"
 // (PATCH) /api/roulette/all
 const resetSeleccionados = async (req, res) => {

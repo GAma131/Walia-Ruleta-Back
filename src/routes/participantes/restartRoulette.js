@@ -12,26 +12,32 @@ const restartRoulette = async (req, res) => {
         .json({ error: "El parámetro 'depa' es requerido." });
     }
 
-    // Verifica si todos los participantes del departamento están seleccionados
+    // Verificar si todos los participantes del departamento han sido seleccionados
     const totalParticipantes = await Participante.countDocuments({
-      departamento: depa,
-    });
-    const seleccionados = await Participante.countDocuments({
-      departamento: depa,
-      seleccionado: true,
+      departamentos: depa,
     });
 
-    if (totalParticipantes > 0 && totalParticipantes === seleccionados) {
-      // Reinicia los participantes del departamento
-      await Participante.updateMany(
-        { departamento: depa },
-        { seleccionado: false, fecha: null }
+    const participantesSeleccionados = await Participante.countDocuments({
+      departamentos: depa,
+      [`seleccionado.${depa}`]: true, // Busca específicamente el departamento con seleccionado: true
+    });
+
+    if (totalParticipantes > 0 && totalParticipantes === participantesSeleccionados) {
+      // Reiniciar el estado "seleccionado" para el departamento específico
+      const participantesActualizados = await Participante.updateMany(
+        { departamentos: depa },
+        {
+          $set: { [`seleccionado.${depa}`]: false }, // Reinicia solo el departamento indicado
+        }
       );
 
-      console.log(`Todos los participantes del departamento '${depa}' han sido reiniciados.`);
+      console.log(
+        `Todos los participantes del departamento '${depa}' han sido reiniciados.`
+      );
       return res.status(200).json({
         success: true,
         message: `Todos los participantes del departamento '${depa}' han sido reiniciados.`,
+        participantesActualizados,
       });
     } else {
       console.log(
